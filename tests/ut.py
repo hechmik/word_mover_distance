@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-import word_embedding
+import word_mover_distance.model as wmd_model
 
 
 def load_model(fn):
@@ -15,14 +15,17 @@ def load_model(fn):
 
 
 class GloVeUT(unittest.TestCase):
-    fn = "../glove.6B/glove.6B.50d.txt"
+    with open("settings.json", "r") as f:
+        import json
+        settings = json.load(f)
+    fn = settings['word_embedding_fn']
 
     def test_init(self):
-        we_fn = word_embedding.WordEmbedding(model_fn=self.fn)
+        we_fn = wmd_model.WordEmbedding(model_fn=self.fn)
         model_fn = we_fn.model
 
         model = load_model(self.fn)
-        we_mod = word_embedding.WordEmbedding(model=model)
+        we_mod = wmd_model.WordEmbedding(model=model)
         model_mod = we_mod.model
 
         self.assertTrue(np.array_equal(model_fn['the'],
@@ -30,11 +33,12 @@ class GloVeUT(unittest.TestCase):
                         "Both initialisation work and return the same vector")
 
     def test_wmd(self):
-        we = word_embedding.WordEmbedding(model_fn=self.fn)
+        we = wmd_model.WordEmbedding(model_fn=self.fn)
         sentence_obama = 'Obama speaks to the media in Chicago'.lower().split()
         sentence_president = 'The president spoke to the press in Chicago'.lower().split()
         sentence_not_related = 'Today is a nice day! What do you think?'.lower().split()
         score_similar = we.wmdistance(sentence_obama, sentence_president)
+        print(score_similar)
         score_not_related = we.wmdistance(sentence_obama, sentence_not_related)
         self.assertTrue(score_similar > 0, "Distance computed correctly")
         self.assertTrue(score_not_related > 0, "Distance computed correctly")

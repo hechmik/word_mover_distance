@@ -1,0 +1,3 @@
+{
+  "word_embedding_fn": "../../glove.6B/glove.6B.50d.txt"
+}
