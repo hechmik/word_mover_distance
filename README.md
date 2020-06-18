@@ -6,7 +6,7 @@ I largely reused code available in the [gensim](https://github.com/RaRe-Technolo
 You can find a real-world usage of this package in my [news summariser repository](https://github.com/hechmik/news_summariser), where I use Word Mover's distance for finding the most similar sentences in a given news article.
 # How to install
 
-The preferred way to install this package is through pip:
+The preferred way to install this package is through [pip](https://pypi.org/project/word-mover-distance/):
 ```bash
 pip install word-mover-distance
 ```
