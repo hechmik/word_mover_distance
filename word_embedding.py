@@ -16,11 +16,14 @@ def nbow(document, vocab_len, dictionary):
 
 class WordEmbedding:
 
-    def __init__(self, model_fn:str):
-        self.model = self.load_word_embedding_model(model_fn)
+    def __init__(self, **kwargs):
+        if "model_fn" in kwargs.keys():
+            self.model = self.load_word_embedding_model(kwargs['model_fn'])
+        elif "model" in kwargs.keys():
+            self.model = kwargs['model']
         self.words = self.model.keys()
 
-    def load_word_embedding_model(self, fn="../glove.6B/glove.6B.50d.txt"):
+    def load_word_embedding_model(self, fn):
         """
         Return the Word Embedding model at the given path
         :param fn: path where the model of interest is stored
