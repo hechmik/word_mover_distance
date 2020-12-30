@@ -10,9 +10,16 @@ The preferred way to install this package is through [pip](https://pypi.org/proj
 ```bash
 pip install word-mover-distance
 ```
+On Mac and Linux it works like a charm. On Windows, however, it is highly likely you will experience some issues: this is due to **pyemd**, which needs some C++ dependencies during build time. A quick way to solve this issue is to install "Build Tools for Visual Studio 2019" following this procedure:
+- Go to the following page and download "Build Tools for Visual Studio 2019" https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019
+- Double click on the .exe file once finished and select to install C++ build tools
+- Check that among the suggested packages to install it is also selected "Windows 10 SDK" (the newest version is fine) as this is the critical dependency
+- Once the installation has finished reopen your PowerShell/Command Prompt and retry to install the library with the original pip instruction
+
+If storage/connectivity speed is critical for your usecase and/or you would like to know more about the issue have a look at [this Stack Overflow discussion](https://stackoverflow.com/questions/40018405/cannot-open-include-file-io-h-no-such-file-or-directory).
 
 # Basic usage 
-Import the library:
+## Import the library:
 ```python
 import word_embedding.model as model
 ```
