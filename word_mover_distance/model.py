@@ -23,15 +23,16 @@ class WordEmbedding:
             self.model = kwargs['model']
         self.words = self.model.keys()
 
-    def load_word_embedding_model(self, fn):
+    def load_word_embedding_model(self, fn, encoding='utf-8'):
         """
         Return the Word Embedding model at the given path
         :param fn: path where the model of interest is stored
+        :param encoding: encoding of the file of interest. Default value is utf-8
         :return:
         """
         logging.info("load_word_embedding_model >>>")
         model = {}
-        with open(fn, 'r') as f:
+        with open(fn, 'r', encoding=encoding) as f:
             for line in f:
                 values = line.split()
                 word = values[0]
