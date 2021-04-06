@@ -21,24 +21,24 @@ If storage/connectivity speed is critical for your usecase and/or you would like
 # Basic usage 
 ## Import the library:
 ```python
-import word_embedding.model as model
+from word_mover_distance import model
 ```
 
 ## Initialise a Word Embedding object
 You can pass the path where the model is stored:
 ```python
-model = model.WordEmbedding(model_fn="/path/where/my/model/is/stored.txt")
+my_model = model.WordEmbedding(model_fn="/path/where/my/model/is/stored.txt")
 ```
 or you can pass the model itself, previously loaded (assuming your model is a dictionary, whose keys are the various words and its values the vector representation of the various words):
 ```python
-model = model.WordEmbedding(model=my_word_embedding_model)
+my_model = model.WordEmbedding(model=my_word_embedding_model)
 ```
 
 ## Compute Word Mover's distance
 ```python
 s1 = 'Obama speaks to the media in Chicago'.lower().split()
 s2 = 'The president spoke to the press in Chicago'.lower().split()
-wmdistance = model.wmdistance(s1, s2)
+wmdistance = my_model.wmdistance(s1, s2)
 1.8119693993679309
 ```
 Remember that the ```wmdistance(s1, s2)``` method expects two ```List[str]``` as input!
